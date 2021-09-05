@@ -2,6 +2,9 @@
 
 namespace momentphp;
 
+use RunTracy\Middlewares\TracyMiddleware;
+use Tracy\Debugger;
+
 /**
  * App
  */
@@ -96,7 +99,7 @@ class App
             $container['debug'] = function ($c) {
                 $isDebug = $c->get('config')->get('app.displayErrorDetails', false);
                 if ($isDebug) {
-                    \Tracy\Debugger::enable();
+                    Debugger::enable();
                 }
                 return $isDebug;
             };
@@ -244,13 +247,6 @@ class App
          */
         $this->slim = new \Slim\App($container);
         $this->container($this->slim->getContainer());
-
-        /**
-         * Init RunTracy
-         */
-        if ($this->container()->get('debug')) {
-            $this->slim->add(new \RunTracy\Middlewares\TracyMiddleware($this->slim));
-        }
 
         /**
          * Settings (Slim)
@@ -522,6 +518,14 @@ class App
         if (!$this->container()->has('config')) {
             return;
         }
+
+        /**
+         * Init RunTracy
+         */
+        if ($this->container()->get('debug')) {
+            $this->slim->add(new TracyMiddleware($this->slim));
+        }
+
         $self = $this;
         $middlewares = $this->container()->get('config')->get('app.middlewares', []);
         $load = function ($middlewares, $type) use ($self) {
