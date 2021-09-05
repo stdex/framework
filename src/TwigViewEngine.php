@@ -2,6 +2,10 @@
 
 namespace momentphp;
 
+use Twig_Extension_Debug;
+use Twig_Extension_Profiler;
+use Twig_Profiler_Profile;
+
 /**
  * TwigViewEngine
  */
@@ -49,6 +53,12 @@ class TwigViewEngine implements \momentphp\interfaces\ViewEngineInterface
         ];
 
         $this->twig = new \Twig_Environment($loader, $environmentOptions);
+
+        if ($debug) {
+            $twigProfile = new Twig_Profiler_Profile();
+            $this->twig->addExtension(new Twig_Extension_Profiler($twigProfile));
+            $this->twig->addExtension(new Twig_Extension_Debug());
+        }
     }
 
     /**

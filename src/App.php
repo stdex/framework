@@ -94,7 +94,11 @@ class App
          */
         if (!isset($container['debug'])) {
             $container['debug'] = function ($c) {
-                return $c->get('config')->get('app.displayErrorDetails', false);
+                $isDebug = $c->get('config')->get('app.displayErrorDetails', false);
+                if ($isDebug) {
+                    \Tracy\Debugger::enable();
+                }
+                return $isDebug;
             };
         }
 
@@ -240,6 +244,13 @@ class App
          */
         $this->slim = new \Slim\App($container);
         $this->container($this->slim->getContainer());
+
+        /**
+         * Init RunTracy
+         */
+        if ($this->container()->get('debug')) {
+            $this->slim->add(new \RunTracy\Middlewares\TracyMiddleware($this->slim));
+        }
 
         /**
          * Settings (Slim)
