@@ -12,9 +12,9 @@ class Error
     /**
      * Constructor
      *
-     * @param \Interop\Container\ContainerInterface $container
+     * @param \Psr\Container\ContainerInterface $container
      */
-    public function __construct(\Interop\Container\ContainerInterface $container)
+    public function __construct(\Psr\Container\ContainerInterface $container)
     {
         $this->container($container);
     }

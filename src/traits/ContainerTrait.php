@@ -17,7 +17,7 @@ trait ContainerTrait
     /**
      * Container
      *
-     * @var \Interop\Container\ContainerInterface
+     * @var \Psr\Container\ContainerInterface
      */
     protected $container;
 
@@ -27,7 +27,7 @@ trait ContainerTrait
      * @param  ContainerInterface|null $container
      * @return ContainerInterface|object
      */
-    public function container(\Interop\Container\ContainerInterface $container = null)
+    public function container(\Psr\Container\ContainerInterface $container = null)
     {
         if ($container !== null) {
             $this->container = $container;

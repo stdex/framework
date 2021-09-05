@@ -19,10 +19,10 @@ class CallableResolver implements \Slim\Interfaces\CallableResolverInterface
     /**
      * Constructor
      *
-     * @param \Interop\Container\ContainerInterface $container
+     * @param \Psr\Container\ContainerInterface $container
      * @param array $options
      */
-    public function __construct(\Interop\Container\ContainerInterface $container, \Slim\Interfaces\CallableResolverInterface $baseResolver)
+    public function __construct(\Psr\Container\ContainerInterface $container, \Slim\Interfaces\CallableResolverInterface $baseResolver)
     {
         $this->container($container);
         $this->baseResolver = $baseResolver;

@@ -12,11 +12,11 @@ class View
     /**
      * Constructor
      *
-     * @param \Interop\Container\ContainerInterface $container
+     * @param \Psr\Container\ContainerInterface $container
      * @param array $options
      * @param string $engine
      */
-    public function __construct(\Interop\Container\ContainerInterface $container, $engine)
+    public function __construct(\Psr\Container\ContainerInterface $container, $engine)
     {
         $this->container($container);
         $this->engine = $engine;

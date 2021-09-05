@@ -21,10 +21,10 @@ abstract class Helper
     /**
      * Constructor
      *
-     * @param \Interop\Container\ContainerInterface $container
+     * @param \Psr\Container\ContainerInterface $container
      * @param array $options
      */
-    public function __construct(\Interop\Container\ContainerInterface $container, Template $template, $options = [])
+    public function __construct(\Psr\Container\ContainerInterface $container, Template $template, $options = [])
     {
         $this->container($container);
         $this->template = $template;

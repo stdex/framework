@@ -17,10 +17,10 @@ class NegotiationMiddleware extends \momentphp\Middleware
     /**
      * Constructor
      *
-     * @param \Interop\Container\ContainerInterface $container
+     * @param \Psr\Container\ContainerInterface $container
      * @param array $options
      */
-    public function __construct(\Interop\Container\ContainerInterface $container, $options = [])
+    public function __construct(\Psr\Container\ContainerInterface $container, $options = [])
     {
         parent::__construct($container, $options);
         $this->negotiator = new \Negotiation\Negotiator;
