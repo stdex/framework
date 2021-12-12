@@ -2,6 +2,8 @@
 
 namespace momentphp\tests\cases\traits;
 
+use PHPUnit\Framework\TestCase;
+
 class ClassTraitConsumer
 {
     use \momentphp\traits\ClassTrait;
@@ -12,18 +14,18 @@ class Consumer
     use \momentphp\traits\ClassTrait;
 }
 
-class ClassTraitTest extends \PHPUnit_Framework_TestCase
+class ClassTraitTest extends TestCase
 {
     public $consumer;
     public $consumerShort;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->consumer = new ClassTraitConsumer;
         $this->consumerShort = new Consumer;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->consumer, $this->consumerShort);
     }

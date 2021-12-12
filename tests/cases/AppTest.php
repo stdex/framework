@@ -6,7 +6,7 @@ class AppTest extends Test
 {
     public $app;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->app = new \momentphp\App([
             \momentphp\tests\bundles\first\Bundle::class => ['alias' => 'first'],
@@ -18,7 +18,7 @@ class AppTest extends Test
         ]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->app);
     }
@@ -136,16 +136,12 @@ class AppTest extends Test
         $app = $this->app;
         $app->registerProviders();
 
-        $this->assertEquals('monkey james from third bundle', trim($app->smarty->render('animal', ['name' => 'james'])));
         $this->assertEquals('monkey james from third bundle', trim($app->twig->render('animal', ['name' => 'james'])));
 
-        $this->assertEquals('zebra james from second bundle', trim($app->smarty->render('animal', ['name' => 'james'], 'second')));
         $this->assertEquals('zebra james from second bundle', trim($app->twig->render('animal', ['name' => 'james'], 'second')));
 
-        $this->assertEquals(true, trim($app->smarty->exists('animal', 'third')));
         $this->assertEquals(true, trim($app->twig->exists('animal', 'third')));
 
-        $this->assertEquals(false, trim($app->smarty->exists('nonexistenttemplate', 'third')));
         $this->assertEquals(false, trim($app->twig->exists('nonexistenttemplate', 'third')));
     }
 
@@ -187,9 +183,7 @@ class AppTest extends Test
     {
         $app = $this->app;
         $app->boot();
-        $app->get('/helper/{viewService}', 'TestController:helper');
-        $res = $app->visit('/helper/smarty');
-        $this->assertEquals('ipsumipsums', trim((string)$res->getBody()));
+        $app->get('/helper/{viewEngine}', 'TestController:helper');
         $res = $app->visit('/helper/twig');
         $this->assertEquals('ipsumipsums', trim((string)$res->getBody()));
     }
@@ -209,7 +203,7 @@ class AppTest extends Test
         $this->assertEquals('hello world', $app->registry->models->Test->greet());
         $model1 = $app->registry->models->Test;
         $model2 = $app->registry->models->Test;
-        $same = (spl_object_hash($model1) === spl_object_hash($model1));
+        $same = (spl_object_hash($model1) === spl_object_hash($model2));
         $this->assertEquals(true, $same);
         $this->assertEquals('subnamespace hello world', $app->registry->models->deep->subnamespace->Test->greet());
     }

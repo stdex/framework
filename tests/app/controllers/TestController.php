@@ -55,7 +55,7 @@ class TestController extends \momentphp\Controller
         $this->view->template('/template3');
     }
 
-    protected function helper($viewEngine = 'smarty')
+    protected function helper($viewEngine = 'twig')
     {
         $this->view->engine($viewEngine);
     }

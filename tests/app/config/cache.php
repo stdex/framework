@@ -1,16 +1,12 @@
 <?php
 
 return [
-
     'default' => 'file',
-
     'stores' => [
-
         'file' => [
             'driver' => 'file',
             'path' => path([app('pathStorage'), 'cache', app()->fingerprint()]),
         ],
-
         'memcached' => [
             'driver'  => 'memcached',
             'servers' => [
@@ -19,9 +15,6 @@ return [
                 ],
             ],
         ],
-
     ],
-
     'prefix' => app()->fingerprint(),
-
 ];
