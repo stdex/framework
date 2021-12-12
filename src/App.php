@@ -615,8 +615,8 @@ class App
             }
         }
 
-        $this->registerProviders();
         $this->registerMiddlewares();
+        $this->registerProviders();
         $this->registerRoutes();
 
         $this->bootBundles();

@@ -2,10 +2,13 @@
 
 namespace momentphp\providers;
 
+use momentphp\Provider;
+use momentphp\TwigViewEngine;
+
 /**
  * TwigProvider
  */
-class TwigProvider extends \momentphp\Provider
+class TwigProvider extends Provider
 {
     /**
      * Register service
@@ -19,7 +22,7 @@ class TwigProvider extends \momentphp\Provider
         }
 
         $this->container()->get('app')->service('twig', function () use ($options) {
-            return new \momentphp\TwigViewEngine($options);
+            return new TwigViewEngine($options);
         });
     }
 }

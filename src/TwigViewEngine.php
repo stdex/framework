@@ -7,6 +7,8 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Twig\Extension\DebugExtension;
+use Twig\Extension\ProfilerExtension;
 use Twig\Loader\FilesystemLoader;
 
 /**
@@ -57,6 +59,11 @@ class TwigViewEngine implements ViewEngineInterface
         ];
 
         $this->twig = new Environment($loader, $environmentOptions);
+
+        if ($options['twig_profile']) {
+            $this->twig->addExtension(new ProfilerExtension($options['twig_profile']));
+            $this->twig->addExtension(new DebugExtension());
+        }
     }
 
     /**
