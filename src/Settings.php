@@ -49,6 +49,7 @@ class Settings implements \ArrayAccess
      * @param  string $key
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         return $this->config->has($this->key($key));
@@ -60,6 +61,7 @@ class Settings implements \ArrayAccess
      * @param  string $key
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return $this->config->get($this->key($key));
@@ -71,6 +73,7 @@ class Settings implements \ArrayAccess
      * @param string $key
      * @param mixed $value
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->config->set($this->key($key), $value);
@@ -81,6 +84,7 @@ class Settings implements \ArrayAccess
      *
      * @param string $key
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         $this->config->set($this->key($key), null);
