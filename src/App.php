@@ -4,7 +4,7 @@ namespace momentphp;
 
 use RunTracy\Middlewares\TracyMiddleware;
 use Tracy\Debugger;
-use Twig_Profiler_Profile;
+use Twig\Profiler\Profile;
 
 /**
  * App
@@ -526,7 +526,7 @@ class App
         if ($this->container()->get('debug') && $this->container()->get('config')->get('app.tracy', [])) {
             $this->slim->add(new TracyMiddleware($this->slim));
             $this->service('twig_profile', function ($c) {
-                return new Twig_Profiler_Profile();
+                return new Profile();
             });
         }
 
