@@ -46,7 +46,7 @@ abstract class Controller
             $this->view = clone $this->container()->get('view');
         }
         $this->container()->get('app')->bindImplementedEvents($this);
-        $this->container()->get('app')->eventsDispatcher()->fire("controller.{static::classPrefix()}.initialize", [$this]);
+        $this->container()->get('app')->eventsDispatcher()->dispatch("controller.{static::classPrefix()}.initialize", [$this]);
     }
 
     /**
@@ -169,9 +169,9 @@ abstract class Controller
         $this->request = $request;
         $this->response = $response;
 
-        $this->container()->get('app')->eventsDispatcher()->fire("controller.{static::classPrefix()}.beforeAction", [$this, $action]);
+        $this->container()->get('app')->eventsDispatcher()->dispatch("controller.{static::classPrefix()}.beforeAction", [$this, $action]);
         $actionResponse = call_user_func_array([$this, $action], $params);
-        $this->container()->get('app')->eventsDispatcher()->fire("controller.{static::classPrefix()}.afterAction", [$this, $action]);
+        $this->container()->get('app')->eventsDispatcher()->dispatch("controller.{static::classPrefix()}.afterAction", [$this, $action]);
 
         if ($actionResponse === null) {
             if ($this->view === null) {

@@ -2,6 +2,9 @@
 
 namespace momentphp;
 
+use Exception;
+use Illuminate\Support\Arr;
+
 /**
  * Config
  */
@@ -65,7 +68,7 @@ class Config implements \ArrayAccess
     {
         list($group, $item) = $this->parseKey($key);
         $this->load($group);
-        return array_get($this->items[$group], $item, $default);
+        return Arr::get($this->items[$group], $item, $default);
     }
 
     /**
@@ -81,7 +84,7 @@ class Config implements \ArrayAccess
         if ($item === null) {
             $this->items[$group] = $value;
         } else {
-            array_set($this->items[$group], $item, $value);
+            Arr::set($this->items[$group], $item, $value);
         }
     }
 
@@ -267,6 +270,7 @@ class Config implements \ArrayAccess
      * @param  string $key
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($key)
     {
         return $this->has($key);
@@ -278,6 +282,7 @@ class Config implements \ArrayAccess
      * @param  string $key
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return $this->get($key);
@@ -289,6 +294,7 @@ class Config implements \ArrayAccess
      * @param string $key
      * @param mixed $value
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         $this->set($key, $value);
@@ -299,6 +305,7 @@ class Config implements \ArrayAccess
      *
      * @param string $key
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         $this->set($key, null);

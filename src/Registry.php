@@ -2,6 +2,8 @@
 
 namespace momentphp;
 
+use Illuminate\Support\Str;
+
 /**
  * Registry
  */
@@ -160,7 +162,7 @@ class Registry
     {
         $this->path[] = $name;
         if (count($this->path) > 1) {
-            $suffix = ucfirst(str_singular($this->path[0]));
+            $suffix = ucfirst(Str::singular($this->path[0]));
             $name = implode('\\', array_slice($this->path, 1)) . $suffix;
             try {
                 $instance = $this->load($name);
